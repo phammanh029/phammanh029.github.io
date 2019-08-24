@@ -1,0 +1,101 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: traefik:1.7
+    restart: always
+    command:
+      - --web
+      - --api
+      - --docker
+      - --docker.watch=true
+      - --docker.exposedbydefault=false
+    ports: 
+      - "8001:80"
+      - "8002:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - ci-network
+
+  git:
+    image: gitea/gitea
+    restart: always
+    environment:
+      - RUN_MODE=prod
+      - DB_TYPE=postgres
+      - DB_HOST=postgres:5432
+      - DB_NAME=gitea
+      - DB_USER=gitea
+      - DB_PASSWD=secret
+      #- SSH_PORT=10022
+      - DISABLE_REGISTRATION=true
+    # ports:
+    #   - "10022:22"
+    volumes:
+      - data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.backend=gitea
+      - traefik.docker.network=web
+      - traefik.port=3000
+      - traefik.frontend.rule=Host:git.local
+    networks:
+      - ci-network
+    depends_on: 
+        - postgres
+
+  postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=gitea
+      - POSTGRES_USER=gitea
+      - POSTGRES_PASSWORD=secret
+    networks:
+      - ci-network
+
+  drone:
+    image: drone/drone:1
+    volumes:
+      - ./drone-data/:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    environment:
+      - DRONE_USER_CREATE=username:git_admin,admin:true
+      - DRONE_OPEN=true
+      - DRONE_SERVER_HOST=drone.local
+      - DRONE_GITEA=true
+      - DRONE_GITEA_SERVER=http://git.local
+      - DRONE_SECRET=secret
+      - DRONE_SERVER_PROTO=http
+    labels:
+      - traefik.enable=true
+      - traefik.port=80
+      - traefik.frontend.rule=Host:drone.local
+    networks:
+      - ci-network
+
+  drone-agent:
+    image: drone/agent
+    command: agent
+    restart: always
+    depends_on:
+      - drone
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SERVER=http://drone.local
+      - DRONE_SECRET=secret
+    networks:
+      - ci-network
+
+volumes:
+  data:
+  postgres:
+  drone:
+networks:
+    ci-network:
+        external: true
