@@ -46,7 +46,8 @@ by
 `androidTestImplementation 'androidx.test:runner:1.1.1'
 androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 # useful package
-https://pub.dev/packages/flutter_slidable
+- dismissable control with behavior
+(https://pub.dev/packages/flutter_slidable)
 ![demo](https://raw.githubusercontent.com/letsar/flutter_slidable/master/doc/images/slidable_overview.gif)
 - launcher url:
 https://pub.dev/packages/url_launcher
