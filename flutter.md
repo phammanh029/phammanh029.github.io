@@ -45,3 +45,6 @@ androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2
 by
 `androidTestImplementation 'androidx.test:runner:1.1.1'
 androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
+# useful package
+https://pub.dev/packages/flutter_slidable
+
