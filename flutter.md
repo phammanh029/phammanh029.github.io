@@ -45,6 +45,9 @@ androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2
 by
 `androidTestImplementation 'androidx.test:runner:1.1.1'
 androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
+# Errors
+ - No toolchains found in the NDK toolchains folder for ABI with prefix: mips64el-linux-android:
+  using : classpath 'com.android.tools.build:gradle:3.2.1' in gradle build file
 # useful package
 - dismissable control with behavior
 (https://pub.dev/packages/flutter_slidable)
