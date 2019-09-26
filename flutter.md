@@ -63,7 +63,10 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 ### GPS
  - location (https://pub.dev/packages/location)
  - geolocator (https://pub.dev/packages/geolocator)
+ - bggeolocation (https://pub.dev/packages/flutter_background_geolocation)
 ### connectivity (https://pub.dev/packages/connectivity)
 ### sharing: 
   - share (https://pub.dev/packages/share)
+### defice info: 
+(https://pub.dev/packages/device_info)
 
