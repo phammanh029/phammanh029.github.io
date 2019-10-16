@@ -70,3 +70,6 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 ### defice info: 
 (https://pub.dev/packages/device_info)
 
+## great posts
+- https://medium.com/flutter-community/flutter-deep-dive-part-1-renderflex-children-have-non-zero-flex-e25ffcf7c272
+
