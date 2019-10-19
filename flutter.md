@@ -85,6 +85,10 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 
 ![](https://user-images.githubusercontent.com/25670178/61337576-978f1780-a853-11e9-9249-3637d0861ebb.gif)
 
+### flutter_slidable [https://pub.dev/packages/flutter_slidable]
+
+![] (https://raw.githubusercontent.com/letsar/flutter_slidable/master/doc/images/slidable_overview.gif)
+
 
 
 
