@@ -72,4 +72,19 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 
 ## great posts
 - https://medium.com/flutter-community/flutter-deep-dive-part-1-renderflex-children-have-non-zero-flex-e25ffcf7c272
+## UI
+
+### Snaplist [https://github.com/ariedov/flutter_snaplist]
+
+![](https://camo.githubusercontent.com/290da53945fac576d9d362ffe40bcdf836def643/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f3237625448616c797765566f6332707353322f67697068792e676966)
+
+### Liquid-Pull-To-Refresh [https://github.com/aagarwal1012/Liquid-Pull-To-Refresh]
+![](https://github.com/aagarwal1012/Liquid-Pull-To-Refresh/blob/master/display/liquid.gif?raw=true)
+
+### before_after [https://github.com/xsahil03x/before_after]
+
+![](https://user-images.githubusercontent.com/25670178/61337576-978f1780-a853-11e9-9249-3637d0861ebb.gif)
+
+
+
 
