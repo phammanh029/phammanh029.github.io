@@ -91,4 +91,9 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 
 ### flutter [url_launcher: ^5.2.3](https://pub.dev/packages/url_launcher#-installing-tab-)
 
+### [flutter sticky list](https://pub.dev/packages/sticky_headers)
+![](https://github.com/slightfoot/flutter_sticky_headers/raw/gh-pages/demo1.gif)
+
+### [flutter segmentation button](https://pub.dev/packages/material_segmented_control)
+![](https://github.com/beagle-barks/material_segmented_control/raw/v2-0-x/images/20190624_235551.jpg)
 
