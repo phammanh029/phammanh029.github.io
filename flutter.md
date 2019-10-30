@@ -51,6 +51,8 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
   
  - Finished with error: Gradle build failed to produce an Android package.
     comment out split apis 
+  -  BlocProvider.of() called with a context that does not contain a Bloc of type 
+      missing set bloc type
 # useful package
 - dismissable control with behavior
 (https://pub.dev/packages/flutter_slidable)
