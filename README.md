@@ -18,3 +18,11 @@ git rm -f path/to/submodule
 
 # cors error when 301
 remove trailing / at end of apis
+
+# config vscode for tsx, jsx, js, ts support
+"files.associations": {
+        "*.js":"javascriptreact",
+        "*.ts": "javascriptreact",
+        "*.jsx": "typescriptreact",
+        "*.tsx":"typescriptreact"
+    },
