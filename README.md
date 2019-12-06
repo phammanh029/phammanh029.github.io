@@ -15,3 +15,6 @@ rm -rf .git/modules/path/to/submodule
 
 # Remove the entry in .gitmodules and remove the submodule directory located at path/to/submodule
 git rm -f path/to/submodule
+
+# cors error when 301
+remove trailing / at end of apis
