@@ -19,3 +19,5 @@ flexDirection: 'column' as const
  - setState in componentDidMount => imediately trigger rerender
  - componentDidUpdate not call for first inital render but other
  
+# life cycle
+- shouldComponentUpdate not call when first render or forceUpdate is call
