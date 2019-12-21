@@ -29,3 +29,4 @@ remove trailing / at end of apis
 ## delete node_modules recursive
 find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
 find . -name "node_modules" -type d -prune -print | xargs du -chs
+find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
