@@ -26,3 +26,5 @@ remove trailing / at end of apis
         "*.jsx": "javascriptreact",
         "*.tsx":"typescriptreact"
     },
+## delete node_modules recursive
+find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
