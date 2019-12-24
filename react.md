@@ -7,3 +7,7 @@ const styles = {
     }
   }
 }
+
+
+ # update from props 
+ useEffect if prop changed
