@@ -30,3 +30,7 @@ remove trailing / at end of apis
 find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
 find . -name "node_modules" -type d -prune -print | xargs du -chs
 find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
+
+## common lib
+ - logger for js: loglevel
+ 
