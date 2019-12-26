@@ -3,6 +3,8 @@ https://github.com/uber/kraken
 # show docker container ip address
 docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
 
+# get docker host ip:
+`$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')`
 
 # install docker on centos
  - remove old docker
