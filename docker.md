@@ -17,3 +17,7 @@ docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Netw
   `sudo yum install docker-ce docker-ce-cli containerd.io`
  - start docker engine
   `sudo systemctl start docker`
+
+# add ping command to docker  (ubuntu)
+apt-get update 
+apt-get install iputils-ping
