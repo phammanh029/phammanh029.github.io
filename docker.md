@@ -21,3 +21,6 @@ docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Netw
 # add ping command to docker  (ubuntu)
 apt-get update 
 apt-get install iputils-ping
+
+# run docker nodejs 11 
+docker run --rm -it -v $(pwd):/src node:11-alpine sh
