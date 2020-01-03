@@ -14,7 +14,7 @@ const styles = {
 
 
 # react select for large list item
-```` class MenuList extends Component {
+`class MenuList extends Component {
     render() {
         const { options, children, maxHeight, getValue } = this.props;
         const [value] = getValue();
@@ -31,6 +31,6 @@ const styles = {
             </List>
         );
     }
-}````
+}`
 
-````<Select {...opts} components={{ MenuList }}/>````
+`<Select {...opts} components={{ MenuList }}/>`
