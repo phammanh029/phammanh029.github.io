@@ -12,6 +12,7 @@ const styles = {
  # update from props 
  useEffect if prop changed
 
+# react-select update default value by capture defaultValue changed
 
 # react select for large list item
 ```
