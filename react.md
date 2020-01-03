@@ -11,3 +11,26 @@ const styles = {
 
  # update from props 
  useEffect if prop changed
+
+
+# react select for large list item
+```` class MenuList extends Component {
+    render() {
+        const { options, children, maxHeight, getValue } = this.props;
+        const [value] = getValue();
+        const initialOffset = options.indexOf(value) * height;
+        // console.log(maxHeight);
+        return (
+            <List
+                height={Math.min(maxHeight, height * children.length)}
+                itemCount={children.length}
+                itemSize={height}
+                initialScrollOffset={initialOffset}
+            >
+                {({ index, style }) => <div style={style}>{children[index]}</div>}
+            </List>
+        );
+    }
+}````
+
+````<Select {...opts} components={{ MenuList }}/>````
