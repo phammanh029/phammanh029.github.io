@@ -34,3 +34,8 @@ find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
 ## common lib
  - logger for js: loglevel
  
+# install npm module for sub dir
+```
+find . -maxdepth 1 -type d \( ! -name . \) -exec sh -c "cd '{}' && echo '>>>>>>>> run in {}' && rm -rf node_modules && npm install" \;
+```
+ 
