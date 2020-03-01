@@ -24,3 +24,6 @@ apt-get install iputils-ping
 
 # run docker nodejs 11 
 docker run --rm -it -v $(pwd):/src node:11-alpine sh
+
+# merge multiple docekr-compose file
+docker-compose -f file1.yml -f file2.yml ... config > all.yml
