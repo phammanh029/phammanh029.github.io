@@ -102,3 +102,11 @@ androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'`
 ### [flutter segmentation button](https://pub.dev/packages/material_segmented_control)
 ![](https://github.com/beagle-barks/material_segmented_control/raw/v2-0-x/images/20190624_235551.jpg)
 
+
+### flutter textfield expandable
+```
+TextField(
+  keyboardType: TextInputType.multiline,
+  maxLines: null,
+)
+```
