@@ -1,4 +1,9 @@
 
+ # find text in directory
+ ```
+ grep -rnw '/path/to/somewhere/' -e 'pattern'
+ ```
+ 
  - pass properties to children react props by using React.cloneElement
  - using withStyles from @material-ui/core/styles for react-admin
 
