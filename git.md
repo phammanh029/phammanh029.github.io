@@ -12,3 +12,12 @@ git commit --amend --reset-author
 ```
 git archive --format zip --output
 ```
+# get repote url
+```
+git config --get remote.origin.url
+```
+
+# store local password
+```
+git remote set-url origin https://${username}@github.com/{path}
+```
