@@ -21,3 +21,12 @@ git config --get remote.origin.url
 ```
 git remote set-url origin https://${username}@github.com/{path}
 ```
+
+# store password for git in helper
+in .git/config
+```
+[credential]
+        helper = osxkeychain
+```
+
+when keychain store 2 accounts for same github page => can be error
