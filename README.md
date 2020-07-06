@@ -44,3 +44,22 @@ find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
 find . -maxdepth 1 -type d \( ! -name . \) -exec sh -c "cd '{}' && echo '>>>>>>>> run in {}' && rm -rf node_modules && npm install" \;
 ```
  
+# reduce pdf size
+```
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf 
+ps2pdf -dPDFSETTINGS=/ebook input.pdf output.pdf
+```
+# make iso file from osx
+```
+hdiutil makehybrid -o ~/Desktop/image.iso ~/path/to/folder/to/be/converted -iso -joliet
+```
+
+# mount disk
+```
+mkdir /mnt/cdrom
+mount -t iso9660 -o ro /dev/sr0 /mnt/cdrom
+```
+# list disk
+```
+lsblk
+```

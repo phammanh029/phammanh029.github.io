@@ -27,3 +27,17 @@ docker run --rm -it -v $(pwd):/src node:11-alpine sh
 
 # merge multiple docekr-compose file
 docker-compose -f file1.yml -f file2.yml ... config > all.yml
+
+# using composer directly
+```
+docker run --rm --interactive --tty --volume $PWD:/app composer install
+```
+# using 
+
+# error when docker compose not access container 
+expose container to compose file
+
+# cleanup registry local (inside docker container)
+```
+cd /etc/docker/registry && registry garbage-collect config.yml
+```

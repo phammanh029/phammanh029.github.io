@@ -61,3 +61,16 @@ class MenuList extends Component {
 
 <Select {...opts} components={{ MenuList }}/>
 ```
+
+
+# React.memo
+memorize result of the component and only rerender if props  changed
+
+# useEffect
+clearTimeout by return a function that excute clearTimeout
+```
+useEffect(()=> {
+    const timer = setTimeout(...);
+    return ()=> { clearTimeout(timer)};
+})
+```
