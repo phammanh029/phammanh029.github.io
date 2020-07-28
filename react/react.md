@@ -74,3 +74,9 @@ useEffect(()=> {
     return ()=> { clearTimeout(timer)};
 })
 ```
+
+# using react router along with function component connect cause history is undefined
+```
+import { withRouter } from 'react-router';
+export default withRouter(connect(null, {logoutUser})(NavBar));
+```

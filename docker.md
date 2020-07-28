@@ -28,6 +28,10 @@ docker run --rm -it -v $(pwd):/src node:11-alpine sh
 # merge multiple docekr-compose file
 docker-compose -f file1.yml -f file2.yml ... config > all.yml
 
+# rebuild docker image when using anonymous volume for node_modules
+`docker-compose up --build -V`
+this is neccessary because of not changing docker volume when up/down docker-compose service
+
 # using composer directly
 ```
 docker run --rm --interactive --tty --volume $PWD:/app composer install
