@@ -46,3 +46,10 @@ log query log
 ```
 DB::listen(function ($query) { dump($query->sql); dump($query->bindings); dump($query->time); });
 ```
+
+# eager load with condition
+```
+->load('relation', function($query){
+    return $query->where();
+})
+```
