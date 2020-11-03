@@ -5,3 +5,9 @@
 
 # for docker run php memory error on composer
 `php -d memory_limit=-1 /usr/bin/composer install`
+
+
+# Common functions
+## filter_var
+Filters a variable with a specified filter
+`filter_var ( mixed $variable [, int $filter = FILTER_DEFAULT [, mixed $options ]] ) : mixed`
