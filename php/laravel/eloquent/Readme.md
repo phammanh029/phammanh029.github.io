@@ -53,3 +53,14 @@ DB::listen(function ($query) { dump($query->sql); dump($query->bindings); dump($
     return $query->where();
 })
 ```
+
+# login with tinker
+```
+$user = User::find(<user_id>);
+Auth::guard('api')->login($user);
+```
+# call controller method
+```
+$controller = app()->make(‘App\Http\Controllers\SomeController’);
+app()->call([$controller, ‘SomeFunction’], []);
+```
