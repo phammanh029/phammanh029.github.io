@@ -1,0 +1,40 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        description: 'The directory where the page should be deployed to'
+        required: false
+        type: string
+
+jobs:
+  deploy-storybook:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-22.04
+    
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Compile
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: ${{ inputs.directory }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.pages
+          destination_dir: ${{ inputs.directory }}
+          keep_files: false

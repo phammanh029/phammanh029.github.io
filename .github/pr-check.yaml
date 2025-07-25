@@ -1,0 +1,24 @@
+name: Check Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  style:
+    name: Coding Style
+    uses: ./.github/workflows/workflow-style.yaml
+    secrets: inherit
+
+  build:
+    needs: style
+    name: Build & Test
+    uses: ./.github/workflows/workflow-build.yaml
+    permissions:
+      contents: read
+      pull-requests: write
+    with:
+      upload: false
+      teamscale-upload: false
+    secrets: inherit
