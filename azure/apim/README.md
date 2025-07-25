@@ -1,5 +1,9 @@
 # API management
 
+# Blogs
+
+https://azure.github.io/apim-lab/
+
 ## Data compression
 
 ```
