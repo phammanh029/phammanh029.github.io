@@ -1,0 +1,101 @@
+name: Terraform Workflow
+
+on:
+  workflow_call:
+    inputs:
+      deploy:
+        required: false
+        type: boolean
+        default: false
+        description: "Flag to indicate if this is a deployment"
+      environment:
+        description: "The environment to deploy to"
+        required: true
+        type: string
+      environment-name:
+        description: "The name of the GitHub environment to use as context for this workflow"
+        required: true
+        type: string
+
+jobs:
+  terraform:
+    name: Terraform
+    environment:
+      name: ${{ inputs.environment-name }}
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      pull-requests: write 
+    steps:
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Prepare environment variables for Terraform
+        run: |
+          ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)          
+          echo "ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID" >> $GITHUB_ENV          
+
+      - name: Initialize terraform
+        working-directory: src/
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+        run: |
+          terraform init \
+            -backend-config=backends/${{ inputs.environment }}.tfvars
+
+      - name: Terraform Validate
+        id: terraform-validate
+        working-directory: src/
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: terraform-plan
+        working-directory: src/
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+        run: |
+          terraform plan \
+            -var-file vars/${{ inputs.environment }}.tfvars \
+            -out=tfplan
+
+          echo "<details>" > plan.txt
+          echo "<summary>Terraform Plan Output</summary>" >> plan.txt
+          echo "" >> plan.txt
+          echo "\`\`\`" >> plan.txt
+          terraform show -no-color tfplan >> plan.txt
+          echo "\`\`\`" >> plan.txt
+          echo "</details>" >> plan.txt
+
+      - name: Comment PR
+        if: ${{ inputs.deploy == false }}
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          file-path: src/plan.txt
+          comment-tag: 'terraform-plan'
+
+      - name: Terraform Apply
+        id: terraform-apply
+        if: ${{ inputs.deploy == true }}
+        working-directory: src/
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+        run: |
+          terraform apply -var-file vars/${{ inputs.environment }}.tfvars -auto-approve
+
+      - name: Terraform Output
+        id: terraform-output
+        if: ${{ steps.terraform-apply.outcome == 'success' }}
+        working-directory: src/
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
+        run: terraform output -json
