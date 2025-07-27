@@ -1,0 +1,59 @@
+name: Deploy Azure Function App
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "The environment to deploy to"
+        required: true
+        type: string
+      environment-name:
+        description: "The name of the GitHub environment to use as context for this workflow"
+        required: true
+        type: string
+      is-deploy:
+        description: "Flag to indicate if this is a deployment"
+        required: false
+        type: boolean
+        default: false
+
+env:
+  AZURE_FUNCTION_APP_NAME: 'fa-${{ inputs.environment }}'
+  AZURE_FUNCTION_APP_PACKAGE_PATH: 'function-app'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    environment: ${{ inputs.environment-name }}
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v4
+
+    - name: Login to Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Setup Python Environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 'Resolve Project Dependencies Using Pip'
+      shell: bash
+      run: |
+        pushd './${{ env.AZURE_FUNCTION_APP_PACKAGE_PATH }}'
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt --target=".python_packages/lib/site-packages"
+        popd
+
+    - name: 'Run Azure Functions Action'
+      if: ${{ inputs.is-deploy }}
+      uses: Azure/functions-action@v1
+      with:
+        app-name: ${{ env.AZURE_FUNCTION_APP_NAME }}
+        package: ${{ env.AZURE_FUNCTION_APP_PACKAGE_PATH }}
+        sku: flexconsumption
+        remote-build: true

@@ -41,12 +41,6 @@ jobs:
           node-version-file: .nvmrc
           cache: 'yarn'
 
-      - name: Setup .npmrc file
-        run: |
-          echo "@jtl:registry=https://jtl-software.myget.org/F/cloud-platform/npm/
-            always-auth=true
-            //jtl-software.myget.org/F/cloud-platform/npm/:_authToken=${{ secrets.MY_GET_API_KEY }}" > .npmrc
-
       - name: Install dependencies
         run: yarn install
 
@@ -64,12 +58,6 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: 'yarn'
-
-      - name: Setup .npmrc file
-        run: |
-          echo "@jtl:registry=https://jtl-software.myget.org/F/cloud-platform/npm/
-            always-auth=true
-            //jtl-software.myget.org/F/cloud-platform/npm/:_authToken=${{ secrets.MY_GET_API_KEY }}" > .npmrc
 
       - name: Install dependencies
         run: yarn install

@@ -1,0 +1,13 @@
+# Testing
+pytest
+pytest-mock
+coverage
+
+# Linting & formatting
+black
+flake8
+isort
+
+# Type checking
+mypy
+types-requests
