@@ -123,4 +123,4 @@ Docker caches layers during the build process. If you change a file that is copi
 - Use `docker build --no-cache` only when necessary, as it forces Docker to rebuild all layers without using the cache, which can significantly increase build time.
 - For the ARG instruction, use it to pass build-time variables that can help in optimizing the build process. For example, you can use it to specify a version of a dependency that is less likely to change
 
-**Note: ** If the ARG is changed, it will invalidate the cache for all subsequent layers, so use it wisely.
+**Note:** If the ARG is changed, it will invalidate the cache for all subsequent layers, so use it wisely.
