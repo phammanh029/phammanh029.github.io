@@ -45,6 +45,44 @@ resource "azurerm_role_assignment" "acr_pull" {
   principal_id         = azurerm_user_assigned_identity.workload_uai.principal_id
 }
 
+resource "azurerm_container_app" "ext_api" {
+  name                         = "ext_api"
+  resource_group_name          = var.resource_group_name
+  container_app_environment_id = azurerm_container_app_environment.simulator_env.id
+  revision_mode                = "Single"
+
+  ingress {
+    external_enabled           = false
+    target_port                = 3000
+    allow_insecure_connections = true
+    traffic_weight {
+      percentage = 100
+      latest_revision = true
+    }
+  }
+
+  template {
+    # should only be 1 replica, should not scale as it holds state in memory and must be consistent
+    min_replicas = 1
+    max_replicas = 1
+
+    container {
+      name   = "ext_api"
+      image  = "nginx:alpine"
+      cpu    = 0.25
+      memory = "0.5Gi"
+      readiness_probe {
+        path                    = "/health"
+        port                    = "80"
+        transport               = "HTTP"
+        failure_count_threshold = 5
+        initial_delay           = 2
+      }
+    }
+
+  }
+}
+
 resource "azurerm_container_app" "apis" {
   name                         = "apis"
   resource_group_name          = var.resource_group_name
@@ -96,6 +134,10 @@ resource "azurerm_container_app" "apis" {
       env {
         name  = "ENV_1"
         value = var.env1
+      }
+      env {
+        name  = "EXT_API_URL"
+        value = "http://ext_api:80"
       }
 
       env {
