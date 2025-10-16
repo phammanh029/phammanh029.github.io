@@ -25,3 +25,11 @@ https://azure.github.io/apim-lab/
     </outbound>
 </policies>
 ```
+
+Rate limit by jwt token:
+```
+<rate-limit-by-key
+                    calls="100"
+                    renewal-period="60"
+                    counter-key="@(context.Request.Headers.GetValueOrDefault("Authorization","").AsJwt()?.Subject)" />
+```

@@ -3,6 +3,8 @@
 Using app overview for something like k8s but less managed.
 
 To use container name as hostname, we need to enable ingress, and enable internal communication like:
+** NOTE **
+For http, if the header contains `host`, it will proxy call to the host
 ```hcl
   ingress {
     external_enabled           = false
