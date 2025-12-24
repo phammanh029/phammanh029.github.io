@@ -25,3 +25,8 @@ https://azure.github.io/apim-lab/
     </outbound>
 </policies>
 ```
+
+
+# Errors handling
+## 412 due to updating policy
+This most likely happens when the resource is being updated while the instance just being deployed. The workaround is to re-deploy the instance again. or we ned to delay the policy update after the instance is deployed.
