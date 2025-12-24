@@ -1,3 +1,59 @@
 providers:
+  kubernetesIngress:
+    enabled: false
   kubernetesGateway:
     enabled: true
+  gateway:
+    enabled: true
+    listeners:
+      web:
+        namespacePolicy:
+          from: "All"
+    service:
+      type: "LoadBalancer"
+      annotations:
+        service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    autoscaling:
+      enabled: true
+      minReplicas: local.traefik_config.minReplicas
+      maxReplicas: local.traefik_config.maxReplicas
+      metrics:
+        - type: "Resource"
+          resource:
+            name: "cpu"
+            target:
+              type: "Utilization"
+              averageUtilization: local.traefik_config.cpu_target_percentage
+        - type: "Resource"
+          resource:
+            name: "memory"
+            target:
+              type: "Utilization"
+              averageUtilization: local.traefik_config.memory_target_percentage
+      behavior:
+        scaleUp:
+          stabilizationWindowSeconds: 0
+          selectPolicy: "Max"
+          policies:
+            - type: "Percent"
+              value: 100
+              periodSeconds: 15
+        scaleDown:
+          stabilizationWindowSeconds: 300
+          selectPolicy: "Min"
+          policies:
+            - type: "Percent"
+              value: 100
+              periodSeconds: 15
+            - type: "Pods"
+              value: 5
+              periodSeconds: 15
+    # Pod anti-affinity to spread Traefik pods across nodes
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                "app.kubernetes.io/name"     : "{{ template \"traefik.name\" . }}"
+                "app.kubernetes.io/instance" : "{{ .Release.Name }}-{{ include \"traefik.namespace\" . }}"
+            topologyKey: "kubernetes.io/hostname"
