@@ -26,7 +26,10 @@ https://azure.github.io/apim-lab/
 </policies>
 ```
 
-
-# Errors handling
-## 412 due to updating policy
-This most likely happens when the resource is being updated while the instance just being deployed. The workaround is to re-deploy the instance again. or we ned to delay the policy update after the instance is deployed.
+Rate limit by jwt token:
+```
+<rate-limit-by-key
+                    calls="100"
+                    renewal-period="60"
+                    counter-key="@(context.Request.Headers.GetValueOrDefault("Authorization","").AsJwt()?.Subject)" />
+```
