@@ -1,3 +1,12 @@
+service:
+  type: LoadBalancer
+  annotations: 
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 providers:
   kubernetesGateway:
     enabled: true
+gateway:
+  listeners:
+    web:
+      namespacePolicy:
+        from: All

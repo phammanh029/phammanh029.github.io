@@ -5,8 +5,8 @@ metadata:
   namespace: default
 spec:
   parentRefs:
-    - name: traefik-gw
-      sectionName: http
+    - name: traefik-gateway
+      sectionName: web
       kind: Gateway
       namespace: traefik
   hostnames:
@@ -27,8 +27,8 @@ metadata:
   namespace: default
 spec:
   parentRefs:
-    - name: traefik-gw
-      sectionName: http
+    - name: traefik-gateway
+      sectionName: web
       kind: Gateway
       namespace: traefik
   hostnames:
