@@ -148,3 +148,11 @@ plugins=(
   colored-man-pages
 )
 ```
+
+
+# Setup github account
+```
+ssh-keygen -t ed25519 -C manh.pham@codeleap.de
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
