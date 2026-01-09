@@ -1,5 +1,5 @@
 # This contains the setup for linux machine for dev (typescript) + devops
-```
+```bash
 sudo apt update
 sudo apt install -y \
   build-essential curl wget git unzip zip ca-certificates gnupg lsb-release \
@@ -11,11 +11,11 @@ sudo apt install -y \
 
 ```
 ## fonts
-```
+```bash
 sudo apt install -y zsh fonts-firacode
 ```
 ## Git config
-```
+```bash
 git config --global init.defaultBranch main
 git config --global pull.rebase false
 git config --global fetch.prune true
@@ -23,20 +23,20 @@ git config --global core.autocrlf input
 ```
 
 ## Nodejs
-```
+```bash
 curl -fsSL https://bun.sh/install | bash
 # restart shell
 bun -v
 ```
 
 ## eslint
-```
+```bash
 npm i -g typescript ts-node eslint prettier
 ```
 
 ## Dockers
 
-```
+```bash
 # Add Docker's official GPG key:
 sudo apt update
 sudo apt install ca-certificates curl
@@ -62,7 +62,7 @@ newgrp docker
 ```
 
 ## Install helm
-```
+```bash
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
 chmod 700 get_helm.sh
 ./get_helm.sh
@@ -70,13 +70,13 @@ sudo snap install k9s --classic
 ```
 
 ## install k3d
-```
+```bash
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 k3d version
 ```
 
 ## install terraform
-```
+```bash
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 wget -O- https://apt.releases.hashicorp.com/gpg | \
 gpg --dearmor | \
@@ -87,12 +87,12 @@ sudo apt update
 ```
 
 ## Slack
-```
+```bash
 sudo snap install slack
 ```
 
 ## Ubuntu
-```
+```bash
 sudo add-apt-repository ppa:ubuntu-vn/ppa
 sudo apt-get update
 sudo apt-get install ibus-unikey
@@ -161,3 +161,46 @@ ssh-add ~/.ssh/id_ed25519
 ```
 sudo apt install thefuck
 ```
+
+## Setup auto completion
+
+```bash
+sudo apt install -y git make gawk
+git clone --recursive https://github.com/akinomyoga/ble.sh.git ~/.ble.sh
+make -C ~/.ble.sh
+```
+Add this to the end of `~/.bashrc`
+```bash
+# ble.sh: history-based autosuggestions (ghost text) + better readline
+source ~/.ble.sh/out/ble.sh
+```
+
+## Vi setup
+```bash
+vim ~/.vimrc
+# add this to the top of the file
+set nocompatible
+```
+
+## Zsh auto suggestion
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+Edit `.zshrc`
+`vi ~/.zshrc`
+
+# update the plugin to:
+```bash
+plugins=(
+  git
+  docker
+  docker-compose
+  kubectl
+  helm
+  terraform
+  zsh-autosuggestions
+)
+```
+apply zsh:
+`source ~/.zshrc`
