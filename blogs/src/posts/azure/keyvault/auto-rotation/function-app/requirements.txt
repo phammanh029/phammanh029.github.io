@@ -1,4 +1,4 @@
-azure-core==1.35.0
+azure-core==1.38.0
 azure-functions==1.23.0
 azure-identity==1.23.0
 azure-keyvault-secrets==4.10.0
